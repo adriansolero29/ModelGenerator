@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DatabaseSetting>
+  <ServerName>localhost</ServerName>
+  <PortNumber>5432</PortNumber>
+  <DatabaseName>TabulationDB</DatabaseName>
+  <UserId>postgres</UserId>
+  <Password>AMCSentinel333!</Password>
+  <DatabaseType>PostgreSQL</DatabaseType>
+</DatabaseSetting>

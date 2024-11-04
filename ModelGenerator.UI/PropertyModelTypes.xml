@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<propertyTypes>
+  <RegularProperty>
+public DataTypeValue PropertyNameValue { get; set; }
+  </RegularProperty>
+  <FullProperty>
+private DataTypeValue _propertyNameValue;
+public DataTypeValue PropertyNameValue
+{
+  get
+  {
+    return _propertyNameValue;
+  }
+  set
+  {
+    _test = value;
+  }
+}
+  </FullProperty>
+</propertyTypes>
