@@ -1,4 +1,5 @@
-﻿using ModelGenerator.UI.Helpers;
+﻿using ModelGenerator.UI.Class;
+using ModelGenerator.UI.Helpers;
 using ModelGenerator.UI.Interface;
 using System;
 using System.Collections.Generic;
@@ -37,11 +38,11 @@ namespace ModelGenerator.UI.Views
 
             DatabaseTypes.DataSource = databaseTypes;
 
-            //DatabaseTypes.SelectedItem = DataCommunication.DatabaseType;
-            //DatabaseName.Text = DataCommunication.DatabaseName;
-            //PortNumber.Text = DataCommunication.PortNumber;
-            //UserId.Text = DataCommunication.UserId;
-            //Password.Text = DataCommunication.Password;
+            DatabaseTypes.SelectedItem = DataCommunication.DatabaseType;
+            DatabaseName.Text = DataCommunication.DatabaseName;
+            PortNumber.Text = DataCommunication.PortNumber;
+            UserId.Text = DataCommunication.UserId;
+            Password.Text = DataCommunication.Password;
         }
 
         private void DatabaseTypes_SelectedIndexChanged(object sender, EventArgs e)
