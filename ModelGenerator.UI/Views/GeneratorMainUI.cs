@@ -52,8 +52,8 @@ namespace ModelGenerator.UI.Views
             UserId.Text = DataCommunication.UserId;
 
             SchemaList.DataSource = await businessLogicService.SchemaList();
-            PropertyTypeList.Items.Add("RegularProperty");
-            PropertyTypeList.Items.Add("FullProperty");
+            PropertyTypeList.Items.Add("Regular Property");
+            PropertyTypeList.Items.Add("Full Property");
         }
 
         private async void SchemaList_SelectedValueChanged(object sender, EventArgs e)
@@ -83,7 +83,20 @@ namespace ModelGenerator.UI.Views
 
         private void GenerateModel_Click(object sender, EventArgs e)
         {
+            if (PropertyTypeList.SelectedItem.ToString() == "Regular Property")
+            {
+                StringBuilder stringBuilder = new StringBuilder(string.Empty);
+                var propFormat = xmlPropertyService.GetValues("RegularProperty");
 
+                foreach (ListViewItem item in ColumnList.Items)
+                {
+                    string tempFormat = propFormat;
+                    string propOutput = tempFormat.Replace("DataTypeValue", item.SubItems[1].Text).Replace("PropertyNameValue", item.Text);
+                    stringBuilder.Append($"{propOutput}\n");
+                }
+
+                MessageBox.Show(stringBuilder.ToString());
+            }
         }
     }
 }
