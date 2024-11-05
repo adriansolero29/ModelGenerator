@@ -40,6 +40,7 @@ namespace ModelGenerator.UI
             {
                 services.AddTransient<GeneratorMainUI>();
                 services.AddTransient<DatabaseSettingSetupWindow>();
+                services.AddTransient<GeneratedModelViewer>();
 
                 services.AddSingleton<IDBInit, PostgreSQLConnection>();
                 services.AddSingleton<IBusinessLogicService, BusinessLogicService>();
