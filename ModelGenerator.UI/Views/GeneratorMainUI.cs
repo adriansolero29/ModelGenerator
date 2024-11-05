@@ -20,15 +20,16 @@ namespace ModelGenerator.UI.Views
         private readonly IXMLService xmlPropertyService;
         private readonly IBusinessLogicService businessLogicService;
         private readonly DatabaseSettingSetupWindow databaseSettingSetupWindow;
+        private readonly GeneratedModelViewer modelViewer;
 
-        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IBusinessLogicService businessLogicService, DatabaseSettingSetupWindow databaseSettingSetupWindow)
+        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IBusinessLogicService businessLogicService, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer)
         {
             InitializeComponent();
             this.databaseXmlService = databaseXmlServiceResolver(XMLService.XMLDatabaseSetting);
             this.xmlPropertyService = databaseXmlServiceResolver(XMLService.PropertyModels);
             this.businessLogicService = businessLogicService;
             this.databaseSettingSetupWindow = databaseSettingSetupWindow;
-
+            this.modelViewer = modelViewer;
             Init();
         }
 
@@ -95,7 +96,25 @@ namespace ModelGenerator.UI.Views
                     stringBuilder.Append($"{propOutput}\n");
                 }
 
-                MessageBox.Show(stringBuilder.ToString());
+                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n" + stringBuilder.ToString() + "\n}";
+                modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
+                modelViewer.ShowDialog();
+            }
+            else if (PropertyTypeList.SelectedItem.ToString() == "Full Property")
+            {
+                StringBuilder stringBuilder = new StringBuilder(string.Empty);
+                var propFormat = xmlPropertyService.GetValues("FullProperty");
+
+                foreach (ListViewItem item in ColumnList.Items)
+                {
+                    string tempFormat = propFormat;
+                    string propOutput = tempFormat.Replace("DataTypeValue", item.SubItems[1].Text).Replace("PropertyNameValue", item.Text).Replace("_propertyNameValue", "_" + item.Text.Substring(0, 1).ToLower() + item.Text.Substring(1));
+                    stringBuilder.Append($"{propOutput}\n\n");
+                }
+
+                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n" +  stringBuilder.ToString() + "\n}";
+                modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
+                modelViewer.ShowDialog();
             }
         }
     }

@@ -2,7 +2,7 @@
 <DatabaseSetting>
   <ServerName>localhost</ServerName>
   <PortNumber>5432</PortNumber>
-  <DatabaseName>TabulationDB</DatabaseName>
+  <DatabaseName>AMC_10_18_2024</DatabaseName>
   <UserId>postgres</UserId>
   <Password>AMCSentinel333!</Password>
   <DatabaseType>PostgreSQL</DatabaseType>
