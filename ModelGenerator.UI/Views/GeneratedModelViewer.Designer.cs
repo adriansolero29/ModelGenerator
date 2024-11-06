@@ -48,7 +48,8 @@ namespace ModelGenerator.UI.Views
             this.ModelOutput.AcceptsTab = true;
             this.ModelOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ModelOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ModelOutput.AutoWordSelection = true;
+            this.ModelOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ModelOutput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ModelOutput.Location = new System.Drawing.Point(12, 31);
             this.ModelOutput.Name = "ModelOutput";

@@ -18,15 +18,17 @@ namespace ModelGenerator.UI.Views
     {
         private readonly IXMLService databaseXmlService;
         private readonly IXMLService xmlPropertyService;
+        private readonly IDataTypeConverter dataTypeConverter;
         private readonly IBusinessLogicService businessLogicService;
         private readonly DatabaseSettingSetupWindow databaseSettingSetupWindow;
         private readonly GeneratedModelViewer modelViewer;
 
-        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IBusinessLogicService businessLogicService, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer)
+        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IDataTypeConverter dataTypeConverter, IBusinessLogicService businessLogicService, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer)
         {
             InitializeComponent();
             this.databaseXmlService = databaseXmlServiceResolver(XMLService.XMLDatabaseSetting);
             this.xmlPropertyService = databaseXmlServiceResolver(XMLService.PropertyModels);
+            this.dataTypeConverter = dataTypeConverter;
             this.businessLogicService = businessLogicService;
             this.databaseSettingSetupWindow = databaseSettingSetupWindow;
             this.modelViewer = modelViewer;
@@ -92,11 +94,11 @@ namespace ModelGenerator.UI.Views
                 foreach (ListViewItem item in ColumnList.Items)
                 {
                     string tempFormat = propFormat;
-                    string propOutput = tempFormat.Replace("DataTypeValue", item.SubItems[1].Text).Replace("PropertyNameValue", item.Text);
+                    string propOutput = tempFormat.Replace("DataTypeValue", dataTypeConverter.Convert(item.SubItems[1].Text)).Replace("PropertyNameValue", item.Text);
                     stringBuilder.Append($"{propOutput}\n");
                 }
 
-                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n" + stringBuilder.ToString() + "\n}";
+                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n\n" + stringBuilder.ToString() + "\n}";
                 modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
                 modelViewer.ShowDialog();
             }
@@ -108,11 +110,11 @@ namespace ModelGenerator.UI.Views
                 foreach (ListViewItem item in ColumnList.Items)
                 {
                     string tempFormat = propFormat;
-                    string propOutput = tempFormat.Replace("DataTypeValue", item.SubItems[1].Text).Replace("PropertyNameValue", item.Text).Replace("_propertyNameValue", "_" + item.Text.Substring(0, 1).ToLower() + item.Text.Substring(1));
+                    string propOutput = tempFormat.Replace("DataTypeValue", dataTypeConverter.Convert(item.SubItems[1].Text)).Replace("PropertyNameValue", item.Text).Replace("_propertyNameValue", "_" + item.Text.Substring(0, 1).ToLower() + item.Text.Substring(1));
                     stringBuilder.Append($"{propOutput}\n\n");
                 }
 
-                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n" +  stringBuilder.ToString() + "\n}";
+                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n\n" + stringBuilder.ToString() + "\n}";
                 modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
                 modelViewer.ShowDialog();
             }

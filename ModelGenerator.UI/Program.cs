@@ -44,6 +44,7 @@ namespace ModelGenerator.UI
 
                 services.AddSingleton<IDBInit, PostgreSQLConnection>();
                 services.AddSingleton<IBusinessLogicService, BusinessLogicService>();
+                services.AddSingleton<IDataTypeConverter, PostgresDataTypeConverter>();
 
                 services.AddTransient<PostgreSQLDataLoader>();
                 services.AddTransient<XMLDatabaseSetting>();
