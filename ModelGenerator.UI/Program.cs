@@ -9,9 +9,10 @@ using ModelGenerator.UI.Views;
 using ModelGenerator.UI.Interface;
 using ModelGenerator.UI.Services;
 using ModelGenerator.UI.Helpers;
-using static ModelGenerator.UI.Helpers.DataLoaderServiceResolver;
+using static ModelGenerator.UI.Enums.Enums;
+
 using ModelGenerator.UI.DataAccess;
-using static ModelGenerator.UI.Helpers.XMLServiceResolver;
+using static ModelGenerator.UI.Helpers.ServiceResolvers;
 
 namespace ModelGenerator.UI
 {
@@ -44,11 +45,22 @@ namespace ModelGenerator.UI
 
                 services.AddSingleton<IDBInit, PostgreSQLConnection>();
                 services.AddSingleton<IBusinessLogicService, BusinessLogicService>();
-                services.AddSingleton<IDataTypeConverter, PostgresDataTypeConverter>();
 
                 services.AddTransient<PostgreSQLDataLoader>();
                 services.AddTransient<XMLDatabaseSetting>();
                 services.AddTransient<XMLPropertyModels>();
+                services.AddTransient<PostgresDataTypeConverter>();
+
+                services.AddTransient<DataTypeConverterServiceResolver>(ServiceProvider => DataLoaderService =>
+                {
+                    switch (DataLoaderService)
+                    {
+                        case DataLoaderService.PostgreSQL:
+                            return ServiceProvider.GetService<PostgresDataTypeConverter>();
+                        default:
+                            throw new KeyNotFoundException("No service registered");
+                    }
+                });
 
                 services.AddTransient<ServiceResolverXML>(ServiceProvider => XMLService =>
                 {
@@ -59,7 +71,7 @@ namespace ModelGenerator.UI
                         case (XMLService.PropertyModels):
                             return ServiceProvider.GetService<XMLPropertyModels>();
                         default:
-                            throw new KeyNotFoundException("NO service registered");
+                            throw new KeyNotFoundException("No service registered");
                     }
                 });
 
@@ -70,7 +82,7 @@ namespace ModelGenerator.UI
                         case (DataLoaderService.PostgreSQL):
                             return ServiceProvider.GetService<PostgreSQLDataLoader>();
                         default:
-                            throw new KeyNotFoundException("NO service registered");
+                            throw new KeyNotFoundException("No service registered");
                     }
                 });
             });

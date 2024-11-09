@@ -1,10 +1,10 @@
 ﻿using ModelGenerator.UI.Class;
-using ModelGenerator.UI.Helpers;
 using ModelGenerator.UI.Interface;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static ModelGenerator.UI.Helpers.XMLServiceResolver;
+using static ModelGenerator.UI.Enums.Enums;
+using static ModelGenerator.UI.Helpers.ServiceResolvers;
 
 namespace ModelGenerator.UI.Views
 {

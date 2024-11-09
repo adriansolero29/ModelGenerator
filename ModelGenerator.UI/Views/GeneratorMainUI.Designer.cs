@@ -54,6 +54,7 @@ namespace ModelGenerator.UI.Views
             this.databaseTypeValue = new System.Windows.Forms.Label();
             this.lblDatabaseName = new System.Windows.Forms.Label();
             this.lblDatabase = new System.Windows.Forms.Label();
+            this.ObjectLoaderCheck = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -96,6 +97,7 @@ namespace ModelGenerator.UI.Views
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ObjectLoaderCheck);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.PropertyTypeList);
             this.panel1.Controls.Add(this.GenerateModel);
@@ -110,7 +112,7 @@ namespace ModelGenerator.UI.Views
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(484, 477);
+            this.panel1.Size = new System.Drawing.Size(484, 494);
             this.panel1.TabIndex = 2;
             // 
             // label2
@@ -329,11 +331,21 @@ namespace ModelGenerator.UI.Views
             this.lblDatabase.TabIndex = 0;
             this.lblDatabase.Text = "Database Type:";
             // 
+            // ObjectLoaderCheck
+            // 
+            this.ObjectLoaderCheck.AutoSize = true;
+            this.ObjectLoaderCheck.Location = new System.Drawing.Point(12, 467);
+            this.ObjectLoaderCheck.Name = "ObjectLoaderCheck";
+            this.ObjectLoaderCheck.Size = new System.Drawing.Size(320, 19);
+            this.ObjectLoaderCheck.TabIndex = 10;
+            this.ObjectLoaderCheck.Text = "Auto set data type if column contains \'Id\'";
+            this.ObjectLoaderCheck.UseVisualStyleBackColor = true;
+            // 
             // GeneratorMainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 501);
+            this.ClientSize = new System.Drawing.Size(484, 518);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -381,6 +393,7 @@ namespace ModelGenerator.UI.Views
         private System.Windows.Forms.Button GenerateModel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox PropertyTypeList;
+        private System.Windows.Forms.CheckBox ObjectLoaderCheck;
     }
 }
 

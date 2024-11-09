@@ -1,16 +1,10 @@
 ﻿using ModelGenerator.UI.Class;
-using ModelGenerator.UI.Helpers;
 using ModelGenerator.UI.Interface;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ModelGenerator.UI.Helpers.XMLServiceResolver;
+using static ModelGenerator.UI.Enums.Enums;
+using static ModelGenerator.UI.Helpers.ServiceResolvers;
 
 namespace ModelGenerator.UI.Views
 {
@@ -23,15 +17,16 @@ namespace ModelGenerator.UI.Views
         private readonly DatabaseSettingSetupWindow databaseSettingSetupWindow;
         private readonly GeneratedModelViewer modelViewer;
 
-        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IDataTypeConverter dataTypeConverter, IBusinessLogicService businessLogicService, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer)
+        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, DataTypeConverterServiceResolver dataTypeConverter, IBusinessLogicService businessLogicService, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer)
         {
             InitializeComponent();
             this.databaseXmlService = databaseXmlServiceResolver(XMLService.XMLDatabaseSetting);
             this.xmlPropertyService = databaseXmlServiceResolver(XMLService.PropertyModels);
-            this.dataTypeConverter = dataTypeConverter;
+            this.dataTypeConverter = dataTypeConverter(DataLoaderService.PostgreSQL);
             this.businessLogicService = businessLogicService;
             this.databaseSettingSetupWindow = databaseSettingSetupWindow;
             this.modelViewer = modelViewer;
+
             Init();
         }
 
@@ -95,6 +90,16 @@ namespace ModelGenerator.UI.Views
                 {
                     string tempFormat = propFormat;
                     string propOutput = tempFormat.Replace("DataTypeValue", dataTypeConverter.Convert(item.SubItems[1].Text)).Replace("PropertyNameValue", item.Text);
+
+                    if (ObjectLoaderCheck.Checked)
+                    {
+                        if (item.Text.Length > 2 && item.Text.Substring(item.Text.Length - 2) == "Id")
+                        {
+                            var dataType = item.Text.Substring(0, item.Text.Length - 2);
+                            propOutput = tempFormat.Replace("DataTypeValue", dataType).Replace("PropertyNameValue", item.Text);
+                        }
+                    }
+                    
                     stringBuilder.Append($"{propOutput}\n");
                 }
 

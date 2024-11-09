@@ -1,12 +1,9 @@
-﻿using ModelGenerator.UI.Helpers;
-using ModelGenerator.UI.Interface;
+﻿using ModelGenerator.UI.Interface;
 using ModelGenerator.UI.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using static ModelGenerator.UI.Helpers.DataLoaderServiceResolver;
+using static ModelGenerator.UI.Enums.Enums;
+using static ModelGenerator.UI.Helpers.ServiceResolvers;
 
 namespace ModelGenerator.UI.Services
 {
