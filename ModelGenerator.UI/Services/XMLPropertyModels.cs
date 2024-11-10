@@ -36,5 +36,10 @@ namespace ModelGenerator.UI.Services
         {
             throw new NotImplementedException();
         }
+
+        public void Write(string elementName, string elementValue)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

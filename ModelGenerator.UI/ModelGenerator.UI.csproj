@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <None Update="DatabaseSetting.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="PropertyModelTypes.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
