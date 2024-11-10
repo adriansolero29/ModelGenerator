@@ -96,14 +96,23 @@ namespace ModelGenerator.UI.Views
                         if (item.Text.Length > 2 && item.Text.Substring(item.Text.Length - 2) == "Id")
                         {
                             var dataType = item.Text.Substring(0, item.Text.Length - 2);
-                            propOutput = tempFormat.Replace("DataTypeValue", dataType).Replace("PropertyNameValue", item.Text);
+                            propOutput = tempFormat.Replace("DataTypeValue", dataType + ModelSuffix.Text).Replace("PropertyNameValue", item.Text);
                         }
                     }
                     
-                    stringBuilder.Append($"{propOutput}\n");
+                    stringBuilder.Append($"{propOutput}");
                 }
 
-                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n\n" + stringBuilder.ToString() + "\n}";
+                modelViewer.ModelOutputValue = @$"using System;
+using System.Text;
+
+namespace {SchemaList.SelectedItem.ToString()}
+{{
+    public class {TableList.SelectedItem.ToString()}
+    {{
+        {stringBuilder.ToString()}
+    }}
+}}";
                 modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
                 modelViewer.ShowDialog();
             }
@@ -116,13 +125,19 @@ namespace ModelGenerator.UI.Views
                 {
                     string tempFormat = propFormat;
                     string propOutput = tempFormat.Replace("DataTypeValue", dataTypeConverter.Convert(item.SubItems[1].Text)).Replace("PropertyNameValue", item.Text).Replace("_propertyNameValue", "_" + item.Text.Substring(0, 1).ToLower() + item.Text.Substring(1));
-                    stringBuilder.Append($"{propOutput}\n\n");
+                    stringBuilder.Append($"{propOutput}\n");
                 }
 
-                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n\n" + stringBuilder.ToString() + "\n}";
+                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n" + stringBuilder.ToString() + "\n}";
                 modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
                 modelViewer.ShowDialog();
             }
+        }
+
+        private void ModelSuffix_TextChanged(object sender, EventArgs e)
+        {
+            var sampleOutput = "ModelName";
+            ModelSampleOutput.Text = $"{sampleOutput}{ModelSuffix.Text}";
         }
     }
 }
