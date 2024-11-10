@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ModelGenerator.UI.Interface
 {
-    public interface IXMLService
+    public interface IDataTypeConverter
     {
-        void Write(string elementName, string elementValue);
-        string GetValues(string condition = null);
+        string Convert(string dbDataType);
     }
 }

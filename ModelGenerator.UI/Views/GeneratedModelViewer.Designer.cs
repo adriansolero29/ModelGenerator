@@ -29,53 +29,34 @@ namespace ModelGenerator.UI.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.TableLabel = new System.Windows.Forms.Label();
-            this.ModelOutput = new System.Windows.Forms.RichTextBox();
+            this.TextPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // TableLabel
+            // TextPanel
             // 
-            this.TableLabel.AutoSize = true;
-            this.TableLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TableLabel.Location = new System.Drawing.Point(12, 9);
-            this.TableLabel.Name = "TableLabel";
-            this.TableLabel.Size = new System.Drawing.Size(18, 19);
-            this.TableLabel.TabIndex = 0;
-            this.TableLabel.Text = "-";
-            // 
-            // ModelOutput
-            // 
-            this.ModelOutput.AcceptsTab = true;
-            this.ModelOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ModelOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ModelOutput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ModelOutput.Location = new System.Drawing.Point(12, 31);
-            this.ModelOutput.Name = "ModelOutput";
-            this.ModelOutput.Size = new System.Drawing.Size(560, 518);
-            this.ModelOutput.TabIndex = 1;
-            this.ModelOutput.Text = "";
-            this.ModelOutput.WordWrap = false;
+            this.TextPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextPanel.Location = new System.Drawing.Point(20, 20);
+            this.TextPanel.Name = "TextPanel";
+            this.TextPanel.Size = new System.Drawing.Size(478, 521);
+            this.TextPanel.TabIndex = 0;
             // 
             // GeneratedModelViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 561);
-            this.ControlBox = false;
-            this.Controls.Add(this.ModelOutput);
-            this.Controls.Add(this.TableLabel);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(518, 561);
+            this.Controls.Add(this.TextPanel);
             this.Name = "GeneratedModelViewer";
+            this.Padding = new System.Windows.Forms.Padding(20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Model Viewer";
+            this.Load += new System.EventHandler(this.GeneratedModelViewer_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label TableLabel;
-        private System.Windows.Forms.RichTextBox ModelOutput;
+        private System.Windows.Forms.Panel TextPanel;
     }
 }

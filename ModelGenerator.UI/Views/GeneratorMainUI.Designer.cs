@@ -34,6 +34,7 @@ namespace ModelGenerator.UI.Views
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DatabaseSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ObjectLoaderCheck = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.PropertyTypeList = new System.Windows.Forms.ComboBox();
             this.GenerateModel = new System.Windows.Forms.Button();
@@ -54,6 +55,10 @@ namespace ModelGenerator.UI.Views
             this.databaseTypeValue = new System.Windows.Forms.Label();
             this.lblDatabaseName = new System.Windows.Forms.Label();
             this.lblDatabase = new System.Windows.Forms.Label();
+            this.ModelSuffixLabel = new System.Windows.Forms.Label();
+            this.ModelSuffix = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ModelSampleOutput = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -96,6 +101,11 @@ namespace ModelGenerator.UI.Views
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ModelSampleOutput);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.ModelSuffix);
+            this.panel1.Controls.Add(this.ModelSuffixLabel);
+            this.panel1.Controls.Add(this.ObjectLoaderCheck);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.PropertyTypeList);
             this.panel1.Controls.Add(this.GenerateModel);
@@ -110,8 +120,18 @@ namespace ModelGenerator.UI.Views
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(484, 477);
+            this.panel1.Size = new System.Drawing.Size(484, 536);
             this.panel1.TabIndex = 2;
+            // 
+            // ObjectLoaderCheck
+            // 
+            this.ObjectLoaderCheck.AutoSize = true;
+            this.ObjectLoaderCheck.Location = new System.Drawing.Point(12, 494);
+            this.ObjectLoaderCheck.Name = "ObjectLoaderCheck";
+            this.ObjectLoaderCheck.Size = new System.Drawing.Size(320, 19);
+            this.ObjectLoaderCheck.TabIndex = 10;
+            this.ObjectLoaderCheck.Text = "Auto set data type if column contains \'Id\'";
+            this.ObjectLoaderCheck.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -329,11 +349,53 @@ namespace ModelGenerator.UI.Views
             this.lblDatabase.TabIndex = 0;
             this.lblDatabase.Text = "Database Type:";
             // 
+            // ModelSuffixLabel
+            // 
+            this.ModelSuffixLabel.AutoSize = true;
+            this.ModelSuffixLabel.Location = new System.Drawing.Point(9, 468);
+            this.ModelSuffixLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ModelSuffixLabel.Name = "ModelSuffixLabel";
+            this.ModelSuffixLabel.Size = new System.Drawing.Size(98, 15);
+            this.ModelSuffixLabel.TabIndex = 11;
+            this.ModelSuffixLabel.Text = "Model Suffix:";
+            // 
+            // ModelSuffix
+            // 
+            this.ModelSuffix.Location = new System.Drawing.Point(111, 465);
+            this.ModelSuffix.Name = "ModelSuffix";
+            this.ModelSuffix.Size = new System.Drawing.Size(176, 23);
+            this.ModelSuffix.TabIndex = 12;
+            this.ModelSuffix.TextChanged += new System.EventHandler(this.ModelSuffix_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.label3.Location = new System.Drawing.Point(292, 468);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 15);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Sample:";
+            // 
+            // ModelSampleOutput
+            // 
+            this.ModelSampleOutput.AutoSize = true;
+            this.ModelSampleOutput.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.ModelSampleOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.ModelSampleOutput.Location = new System.Drawing.Point(352, 468);
+            this.ModelSampleOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ModelSampleOutput.Name = "ModelSampleOutput";
+            this.ModelSampleOutput.Size = new System.Drawing.Size(14, 15);
+            this.ModelSampleOutput.TabIndex = 14;
+            this.ModelSampleOutput.Text = "-";
+            // 
             // GeneratorMainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 501);
+            this.ClientSize = new System.Drawing.Size(484, 560);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -381,6 +443,11 @@ namespace ModelGenerator.UI.Views
         private System.Windows.Forms.Button GenerateModel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox PropertyTypeList;
+        private System.Windows.Forms.CheckBox ObjectLoaderCheck;
+        private System.Windows.Forms.Label ModelSampleOutput;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox ModelSuffix;
+        private System.Windows.Forms.Label ModelSuffixLabel;
     }
 }
 

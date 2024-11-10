@@ -3,10 +3,11 @@ using ModelGenerator.UI.Interface;
 using System;
 using System.IO;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace ModelGenerator.UI.Services
 {
-    public class XMLDatabaseSetting : IXMLService
+    public class XMLDatabaseSetting : IXMLService, IXMLDatabaseSetting
     {
         public string XMLPath { get; private set; }
         private readonly XmlDocument xmlDoc;
@@ -14,7 +15,7 @@ namespace ModelGenerator.UI.Services
         public XMLDatabaseSetting()
         {
             this.xmlDoc = new XmlDocument();
-            this.XMLPath = "DatabaseSetting.xml";
+            this.XMLPath = "..\\..\\..\\DatabaseSetting.xml";
 
             xmlDoc.Load(this.XMLPath);
             GetValues();
@@ -37,9 +38,23 @@ namespace ModelGenerator.UI.Services
             return string.Empty;
         }
 
-        public void Write()
+        public void Write(string elementName, string elementValue)
         {
-            throw new NotImplementedException();
+            XDocument xdoc = XDocument.Load(XMLPath);
+            XElement element = xdoc.Element("DatabaseSetting");
+            element.SetElementValue(elementName, elementValue);
+
+            xdoc.Save(XMLPath);
+        }
+
+        public void ChangeDatabaseSetting()
+        {
+            Write("ServerName", DataCommunication.ServerName);
+            Write("PortNumber", DataCommunication.PortNumber);
+            Write("DatabaseName", DataCommunication.DatabaseName);
+            Write("UserId", DataCommunication.UserId);
+            Write("Password", DataCommunication.Password);
+            Write("DatabaseType", DataCommunication.DatabaseType);
         }
     }
 }

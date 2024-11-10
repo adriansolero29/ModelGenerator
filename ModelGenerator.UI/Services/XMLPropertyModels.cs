@@ -28,11 +28,16 @@ namespace ModelGenerator.UI.Services
             {
                 var xml = xmlDoc.DocumentElement;
                 var modelType = xml.GetElementsByTagName(condition);
-                return modelType.Item(0).InnerText.Trim();
+                return modelType.Item(0).InnerText;
             }
         }
 
         public void Write()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Write(string elementName, string elementValue)
         {
             throw new NotImplementedException();
         }
