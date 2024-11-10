@@ -53,12 +53,8 @@ namespace ModelGenerator.UI.Services
                 output = TypeAliases[typeof(Guid)];
             else if (dbDataType == "bytea")
                 output = TypeAliases[typeof(byte[])];
-            else if (dbDataType == "timestamp without time zone" || dbDataType == "timestamp with time zone" || dbDataType == "date")
+            else if (dbDataType == "timestamp without time zone" || dbDataType == "timestamp with time zone" || dbDataType == "date" || dbDataType == "time without time zone" || dbDataType == "time with time zone")
                 output = TypeAliases[typeof(DateTime)];
-            else if (dbDataType == "time without time zone")
-                output = TypeAliases[typeof(TimeSpan)] + " or TimeOnly (6.0+)";
-            else if (dbDataType == "time with time zone")
-                output = TypeAliases[typeof(DateTimeOffset)];
             else if (dbDataType == "interval")
                 output = TypeAliases[typeof(TimeSpan)];
             else
