@@ -17,4 +17,19 @@
           }
         }
   </FullProperty>
+    <OnPropChangedProperty>
+        private DataTypeValue _propertyNameValue;
+        public DataTypeValue PropertyNameValue
+        {
+          get
+          {
+            return _propertyNameValue;
+          }
+          set
+          {
+            _propertyNameValue = value;
+            OnPropertyChanged(nameof(PropertyNameValue));
+          }
+        }
+  </OnPropChangedProperty>
 </propertyTypes>

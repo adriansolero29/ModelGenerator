@@ -1,6 +1,8 @@
 ﻿using ModelGenerator.UI.Class;
+using ModelGenerator.UI.Helpers;
 using ModelGenerator.UI.Interface;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using static ModelGenerator.UI.Enums.Enums;
@@ -50,8 +52,9 @@ namespace ModelGenerator.UI.Views
             UserId.Text = DataCommunication.UserId;
 
             SchemaList.DataSource = await businessLogicService.SchemaList();
-            PropertyTypeList.Items.Add("Regular Property");
-            PropertyTypeList.Items.Add("Full Property");
+            PropertyTypeList.Items.Add("RegularProperty");
+            PropertyTypeList.Items.Add("FullProperty");
+            PropertyTypeList.Items.Add("OnPropChangedProperty");
         }
 
         private async void SchemaList_SelectedValueChanged(object sender, EventArgs e)
@@ -81,57 +84,18 @@ namespace ModelGenerator.UI.Views
 
         private void GenerateModel_Click(object sender, EventArgs e)
         {
-            if (PropertyTypeList.SelectedItem.ToString() == "Regular Property")
+            ModelOutputGenerator.ModelName = TableList.SelectedItem.ToString();
+            ModelOutputGenerator.ModelSchema = SchemaList.SelectedItem.ToString();
+
+            var listColumns = new List<(string, string)>();
+            foreach (ListViewItem item in ColumnList.Items)
             {
-                StringBuilder stringBuilder = new StringBuilder(string.Empty);
-                var propFormat = xmlPropertyService.GetValues("RegularProperty");
-
-                foreach (ListViewItem item in ColumnList.Items)
-                {
-                    string tempFormat = propFormat;
-                    string propOutput = tempFormat.Replace("DataTypeValue", dataTypeConverter.Convert(item.SubItems[1].Text)).Replace("PropertyNameValue", item.Text);
-
-                    if (ObjectLoaderCheck.Checked)
-                    {
-                        if (item.Text.Length > 2 && item.Text.Substring(item.Text.Length - 2) == "Id")
-                        {
-                            var dataType = item.Text.Substring(0, item.Text.Length - 2);
-                            propOutput = tempFormat.Replace("DataTypeValue", dataType + ModelSuffix.Text).Replace("PropertyNameValue", item.Text);
-                        }
-                    }
-                    
-                    stringBuilder.Append($"{propOutput}");
-                }
-
-                modelViewer.ModelOutputValue = @$"using System;
-using System.Text;
-
-namespace {SchemaList.SelectedItem.ToString()}
-{{
-    public class {TableList.SelectedItem.ToString()}
-    {{
-        {stringBuilder.ToString()}
-    }}
-}}";
-                modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
-                modelViewer.ShowDialog();
+                listColumns.Add((item.Text, item.SubItems[1].Text));
             }
-            else if (PropertyTypeList.SelectedItem.ToString() == "Full Property")
-            {
-                StringBuilder stringBuilder = new StringBuilder(string.Empty);
-                var propFormat = xmlPropertyService.GetValues("FullProperty");
 
-                foreach (ListViewItem item in ColumnList.Items)
-                {
-                    string tempFormat = propFormat;
-                    string propOutput = tempFormat.Replace("DataTypeValue", dataTypeConverter.Convert(item.SubItems[1].Text)).Replace("PropertyNameValue", item.Text).Replace("_propertyNameValue", "_" + item.Text.Substring(0, 1).ToLower() + item.Text.Substring(1));
-                    stringBuilder.Append($"{propOutput}\n");
-                }
-
-                modelViewer.ModelOutputValue = "public class " + TableList.SelectedItem.ToString() + "\n{\n" + stringBuilder.ToString() + "\n}";
-                modelViewer.ModelName = SchemaList.SelectedItem.ToString() + "." + TableList.SelectedItem.ToString();
-                modelViewer.ShowDialog();
-            }
+            var output = ModelOutputGenerator.Output(PropertyTypeList.SelectedItem.ToString(), listColumns, ObjectLoaderCheck.Checked, ModelSuffix.Text, xmlPropertyService, dataTypeConverter);
+            modelViewer.ModelOutputValue = output;
+            modelViewer.ShowDialog();
         }
 
         private void ModelSuffix_TextChanged(object sender, EventArgs e)
