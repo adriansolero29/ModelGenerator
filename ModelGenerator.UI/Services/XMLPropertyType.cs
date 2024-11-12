@@ -1,18 +1,33 @@
 ﻿using ModelGenerator.UI.Interface;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace ModelGenerator.UI.Services
 {
-    public class XMLPropertyType : IXMLService
+    public class XMLPropertyType : IXMLPropertyTypesList
     {
-        public string GetValues(string condition = null)
+        public string XMLPath { get; set; }
+        private readonly XDocument xmlDoc;
+
+        public XMLPropertyType()
         {
-            throw new NotImplementedException();
+            this.xmlDoc = new XDocument();
+            this.XMLPath = "PropertyModelTypes.xml";
+            xmlDoc = XDocument.Load(XMLPath);
         }
 
-        public void Write(string elementName, string elementValue)
+        public IEnumerable<string> GetProperties()
         {
-            throw new NotImplementedException();
+            var output = new List<string>();
+            foreach (var item in xmlDoc.Root.DescendantNodes().OfType<XElement>().Select(x => x.Name).Distinct())
+            {
+                output.Add(item.LocalName);
+            }
+
+            return output;
         }
     }
 }

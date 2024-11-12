@@ -6,7 +6,7 @@ namespace ModelGenerator.UI.Services
 {
     public class XMLPropertyModels : IXMLService
     {
-        public string XMLPath { get; private set; }
+        public string XMLPath { get; set; }
         private readonly XmlDocument xmlDoc;
 
         public XMLPropertyModels()
@@ -30,11 +30,6 @@ namespace ModelGenerator.UI.Services
                 var modelType = xml.GetElementsByTagName(condition);
                 return modelType.Item(0).InnerText;
             }
-        }
-
-        public void Write()
-        {
-            throw new NotImplementedException();
         }
 
         public void Write(string elementName, string elementValue)
