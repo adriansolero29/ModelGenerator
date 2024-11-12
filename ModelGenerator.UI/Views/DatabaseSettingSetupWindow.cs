@@ -12,7 +12,7 @@ namespace ModelGenerator.UI.Views
     {
         private readonly IDBInit dbInitialize;
         private readonly IXMLDatabaseSetting xmlDatabaseSetting;
-        private IXMLService xmlService;
+        private readonly IXMLService xmlService;
 
         public DatabaseSettingSetupWindow(IDBInit dbInitialize, IXMLDatabaseSetting xmlDatabaseSetting, ServiceResolverXML xMLServiceResolver)
         {
@@ -35,7 +35,6 @@ namespace ModelGenerator.UI.Views
             var databaseTypes = new List<string>()
             {
                 "PostgreSQL",
-                "SQL Server"
             };
 
             DatabaseTypes.DataSource = databaseTypes;
