@@ -16,16 +16,18 @@ namespace ModelGenerator.UI.Views
         private readonly IXMLService xmlPropertyService;
         private readonly IDataTypeConverter dataTypeConverter;
         private readonly IBusinessLogicService businessLogicService;
+        private readonly IXMLPropertyTypesList xMLPropertyTypesList;
         private readonly DatabaseSettingSetupWindow databaseSettingSetupWindow;
         private readonly GeneratedModelViewer modelViewer;
 
-        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, DataTypeConverterServiceResolver dataTypeConverter, IBusinessLogicService businessLogicService, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer)
+        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IBusinessLogicService businessLogicService, IXMLPropertyTypesList xMLPropertyTypesList, DataTypeConverterServiceResolver dataTypeConverter, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer)
         {
             InitializeComponent();
             this.databaseXmlService = databaseXmlServiceResolver(XMLService.XMLDatabaseSetting);
             this.xmlPropertyService = databaseXmlServiceResolver(XMLService.PropertyModels);
             this.dataTypeConverter = dataTypeConverter(DataLoaderService.PostgreSQL);
             this.businessLogicService = businessLogicService;
+            this.xMLPropertyTypesList = xMLPropertyTypesList;
             this.databaseSettingSetupWindow = databaseSettingSetupWindow;
             this.modelViewer = modelViewer;
 
@@ -52,9 +54,7 @@ namespace ModelGenerator.UI.Views
             UserId.Text = DataCommunication.UserId;
 
             SchemaList.DataSource = await businessLogicService.SchemaList();
-            PropertyTypeList.Items.Add("RegularProperty");
-            PropertyTypeList.Items.Add("FullProperty");
-            PropertyTypeList.Items.Add("OnPropChangedProperty");
+            PropertyTypeList.DataSource = xMLPropertyTypesList.GetProperties();
         }
 
         private async void SchemaList_SelectedValueChanged(object sender, EventArgs e)
@@ -84,6 +84,12 @@ namespace ModelGenerator.UI.Views
 
         private void GenerateModel_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(PropertyTypeList.SelectedItem.ToString()))
+            {
+                MessageBox.Show("Select property type", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             ModelOutputGenerator.ModelName = TableList.SelectedItem.ToString();
             ModelOutputGenerator.ModelSchema = SchemaList.SelectedItem.ToString();
 
