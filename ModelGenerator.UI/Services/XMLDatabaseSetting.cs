@@ -9,13 +9,13 @@ namespace ModelGenerator.UI.Services
 {
     public class XMLDatabaseSetting : IXMLService, IXMLDatabaseSetting
     {
-        public string XMLPath { get; private set; }
+        public string XMLPath { get; set; }
         private readonly XmlDocument xmlDoc;
 
         public XMLDatabaseSetting()
         {
             this.xmlDoc = new XmlDocument();
-            this.XMLPath = "..\\..\\..\\DatabaseSetting.xml";
+            this.XMLPath = "DatabaseSetting.xml";
 
             xmlDoc.Load(this.XMLPath);
             GetValues();

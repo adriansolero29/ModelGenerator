@@ -8,6 +8,7 @@ namespace ModelGenerator.UI.Interface
 {
     public interface IXMLService
     {
+        string XMLPath { get; set; }
         void Write(string elementName, string elementValue);
         string GetValues(string condition = null);
     }
