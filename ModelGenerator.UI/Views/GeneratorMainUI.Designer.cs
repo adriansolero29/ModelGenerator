@@ -34,6 +34,10 @@ namespace ModelGenerator.UI.Views
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DatabaseSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ModelSampleOutput = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ModelSuffix = new System.Windows.Forms.TextBox();
+            this.ModelSuffixLabel = new System.Windows.Forms.Label();
             this.ObjectLoaderCheck = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.PropertyTypeList = new System.Windows.Forms.ComboBox();
@@ -55,10 +59,7 @@ namespace ModelGenerator.UI.Views
             this.databaseTypeValue = new System.Windows.Forms.Label();
             this.lblDatabaseName = new System.Windows.Forms.Label();
             this.lblDatabase = new System.Windows.Forms.Label();
-            this.ModelSuffixLabel = new System.Windows.Forms.Label();
-            this.ModelSuffix = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ModelSampleOutput = new System.Windows.Forms.Label();
+            this.propertyTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -69,7 +70,8 @@ namespace ModelGenerator.UI.Views
             this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.DatabaseSetting});
+            this.DatabaseSetting,
+            this.propertyTypesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -122,6 +124,48 @@ namespace ModelGenerator.UI.Views
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(484, 536);
             this.panel1.TabIndex = 2;
+            // 
+            // ModelSampleOutput
+            // 
+            this.ModelSampleOutput.AutoSize = true;
+            this.ModelSampleOutput.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.ModelSampleOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.ModelSampleOutput.Location = new System.Drawing.Point(352, 468);
+            this.ModelSampleOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ModelSampleOutput.Name = "ModelSampleOutput";
+            this.ModelSampleOutput.Size = new System.Drawing.Size(14, 15);
+            this.ModelSampleOutput.TabIndex = 14;
+            this.ModelSampleOutput.Text = "-";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.label3.Location = new System.Drawing.Point(292, 468);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 15);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Sample:";
+            // 
+            // ModelSuffix
+            // 
+            this.ModelSuffix.Location = new System.Drawing.Point(111, 465);
+            this.ModelSuffix.Name = "ModelSuffix";
+            this.ModelSuffix.Size = new System.Drawing.Size(176, 23);
+            this.ModelSuffix.TabIndex = 12;
+            this.ModelSuffix.TextChanged += new System.EventHandler(this.ModelSuffix_TextChanged);
+            // 
+            // ModelSuffixLabel
+            // 
+            this.ModelSuffixLabel.AutoSize = true;
+            this.ModelSuffixLabel.Location = new System.Drawing.Point(9, 468);
+            this.ModelSuffixLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ModelSuffixLabel.Name = "ModelSuffixLabel";
+            this.ModelSuffixLabel.Size = new System.Drawing.Size(98, 15);
+            this.ModelSuffixLabel.TabIndex = 11;
+            this.ModelSuffixLabel.Text = "Model Suffix:";
             // 
             // ObjectLoaderCheck
             // 
@@ -349,47 +393,12 @@ namespace ModelGenerator.UI.Views
             this.lblDatabase.TabIndex = 0;
             this.lblDatabase.Text = "Database Type:";
             // 
-            // ModelSuffixLabel
+            // propertyTypesToolStripMenuItem
             // 
-            this.ModelSuffixLabel.AutoSize = true;
-            this.ModelSuffixLabel.Location = new System.Drawing.Point(9, 468);
-            this.ModelSuffixLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ModelSuffixLabel.Name = "ModelSuffixLabel";
-            this.ModelSuffixLabel.Size = new System.Drawing.Size(98, 15);
-            this.ModelSuffixLabel.TabIndex = 11;
-            this.ModelSuffixLabel.Text = "Model Suffix:";
-            // 
-            // ModelSuffix
-            // 
-            this.ModelSuffix.Location = new System.Drawing.Point(111, 465);
-            this.ModelSuffix.Name = "ModelSuffix";
-            this.ModelSuffix.Size = new System.Drawing.Size(176, 23);
-            this.ModelSuffix.TabIndex = 12;
-            this.ModelSuffix.TextChanged += new System.EventHandler(this.ModelSuffix_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.label3.Location = new System.Drawing.Point(292, 468);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 15);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Sample:";
-            // 
-            // ModelSampleOutput
-            // 
-            this.ModelSampleOutput.AutoSize = true;
-            this.ModelSampleOutput.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.ModelSampleOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.ModelSampleOutput.Location = new System.Drawing.Point(352, 468);
-            this.ModelSampleOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ModelSampleOutput.Name = "ModelSampleOutput";
-            this.ModelSampleOutput.Size = new System.Drawing.Size(14, 15);
-            this.ModelSampleOutput.TabIndex = 14;
-            this.ModelSampleOutput.Text = "-";
+            this.propertyTypesToolStripMenuItem.Name = "propertyTypesToolStripMenuItem";
+            this.propertyTypesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.propertyTypesToolStripMenuItem.Text = "Property Types";
+            this.propertyTypesToolStripMenuItem.Click += new System.EventHandler(this.propertyTypesToolStripMenuItem_Click);
             // 
             // GeneratorMainUI
             // 
@@ -448,6 +457,7 @@ namespace ModelGenerator.UI.Views
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox ModelSuffix;
         private System.Windows.Forms.Label ModelSuffixLabel;
+        private System.Windows.Forms.ToolStripMenuItem propertyTypesToolStripMenuItem;
     }
 }
 

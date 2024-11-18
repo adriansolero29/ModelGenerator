@@ -45,6 +45,7 @@ namespace {ModelSchema}
     public class {ModelName}
     {{
         {stringBuilder.ToString()}
+
     }}
 }}";
 

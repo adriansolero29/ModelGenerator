@@ -1,4 +1,5 @@
 ﻿using ModelGenerator.UI.Helpers;
+using ModelGenerator.UI.Models;
 using ScintillaNET;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace ModelGenerator.UI.Views
 {
     public partial class GeneratedModelViewer : Form
     {
+        #region Scintilla
+
         ScintillaNET.Scintilla TextArea;
 
         private const int BACK_COLOR = 0x2A211C;
@@ -40,8 +43,6 @@ namespace ModelGenerator.UI.Views
             InitSyntaxColoring();
             InitNumberMargin();
             InitCodeFolding();
-
-            TextArea.Text = ModelOutputValue;
         }
 
         private void InitNumberMargin()
@@ -185,37 +186,28 @@ namespace ModelGenerator.UI.Views
             HotKeyManager.Enable = true;
         }
 
+        #endregion
+
         #region Properties
 
-        private string _modelOutputValue;
+        private PropertyTypeModel _propertyModel;
 
-        public string ModelOutputValue
+        public PropertyTypeModel PropertyModel
         {
-            get { return _modelOutputValue; }
-            set
+            get 
             {
-                _modelOutputValue = value;
-                TextArea.Text = value;
+                if (_propertyModel == null)
+                    _propertyModel = new PropertyTypeModel();
+                return _propertyModel; 
             }
-        }
-
-        private string _modelName;
-
-        public string ModelName
-        {
-            get { return _modelName; }
-            set
-            {
-                _modelName = value;
-                this.Text = value;
-            }
+            set { _propertyModel = value; }
         }
 
         #endregion
 
         private void GeneratedModelViewer_Load(object sender, EventArgs e)
         {
-
+            TextArea.Text = PropertyModel.ModelFormat;
         }
 
         private void indentFormatToolStripMenuItem_Click(object sender, EventArgs e)
