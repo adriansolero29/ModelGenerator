@@ -10,19 +10,17 @@ namespace ModelGenerator.UI.Services
     public class XMLDatabaseSetting : IXMLService, IXMLDatabaseSetting
     {
         public string XMLPath { get; set; }
-        private readonly XmlDocument xmlDoc;
+        private XmlDocument xmlDoc;
 
         public XMLDatabaseSetting()
         {
-            this.xmlDoc = new XmlDocument();
-            this.XMLPath = "DatabaseSetting.xml";
-
-            xmlDoc.Load(this.XMLPath);
             GetValues();
         }
 
         public string GetValues(string condition = null)
         {
+            LoadXML();
+
             if (File.Exists(XMLPath))
             {
                 DataCommunication.ServerName = xmlDoc.DocumentElement.ChildNodes[0].InnerText;
@@ -55,6 +53,19 @@ namespace ModelGenerator.UI.Services
             Write("UserId", DataCommunication.UserId);
             Write("Password", DataCommunication.Password);
             Write("DatabaseType", DataCommunication.DatabaseType);
+        }
+
+        public void Add(string elementName, string elementValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadXML()
+        {
+            this.xmlDoc = new XmlDocument();
+            this.XMLPath = "DatabaseSetting.xml";
+
+            xmlDoc.Load(this.XMLPath);
         }
     }
 }

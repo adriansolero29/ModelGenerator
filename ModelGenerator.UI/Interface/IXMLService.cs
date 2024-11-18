@@ -10,6 +10,8 @@ namespace ModelGenerator.UI.Interface
     {
         string XMLPath { get; set; }
         void Write(string elementName, string elementValue);
+        void Add(string elementName, string elementValue);
         string GetValues(string condition = null);
+        void LoadXML();
     }
 }

@@ -1,25 +1,23 @@
 ﻿using ModelGenerator.UI.Interface;
 using System;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace ModelGenerator.UI.Services
 {
     public class XMLPropertyModels : IXMLService
     {
         public string XMLPath { get; set; }
-        private readonly XmlDocument xmlDoc;
+        private XmlDocument xmlDoc;
 
         public XMLPropertyModels()
         {
-            this.xmlDoc = new XmlDocument();
-            this.XMLPath = "PropertyModelTypes.xml";
-
-            xmlDoc.Load(this.XMLPath);
             GetValues();
         }
 
         public string GetValues(string condition = null)
         {
+            LoadXML();
             if (condition == null)
             {
                 return string.Empty;
@@ -34,7 +32,27 @@ namespace ModelGenerator.UI.Services
 
         public void Write(string elementName, string elementValue)
         {
-            throw new NotImplementedException();
+            XDocument xdoc = XDocument.Load(XMLPath);
+            XElement element = xdoc.Element("propertyTypes");
+            element.SetElementValue(elementName, elementValue);
+
+            xdoc.Save(XMLPath);
+        }
+
+        public void Add(string elementName, string elementValue)
+        {
+            XDocument xdoc = XDocument.Load(XMLPath);
+            XElement element = xdoc.Element("propertyTypes");
+            element.SetElementValue(elementName, elementValue);
+
+            xdoc.Save(XMLPath);
+        }
+
+        public void LoadXML()
+        {
+            this.xmlDoc = new XmlDocument();
+            this.XMLPath = "PropertyModelTypes.xml";
+            xmlDoc.Load(this.XMLPath);
         }
     }
 }

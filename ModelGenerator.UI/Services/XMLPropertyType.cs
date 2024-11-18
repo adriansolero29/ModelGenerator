@@ -10,17 +10,17 @@ namespace ModelGenerator.UI.Services
     public class XMLPropertyType : IXMLPropertyTypesList
     {
         public string XMLPath { get; set; }
-        private readonly XDocument xmlDoc;
+        private XDocument xmlDoc;
 
         public XMLPropertyType()
         {
-            this.xmlDoc = new XDocument();
             this.XMLPath = "PropertyModelTypes.xml";
-            xmlDoc = XDocument.Load(XMLPath);
+            this.xmlDoc = new XDocument();
         }
 
         public IEnumerable<string> GetProperties()
         {
+            xmlDoc = XDocument.Load(XMLPath);
             var output = new List<string>();
             foreach (var item in xmlDoc.Root.DescendantNodes().OfType<XElement>().Select(x => x.Name).Distinct())
             {
