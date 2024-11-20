@@ -29,6 +29,7 @@ namespace ModelGenerator.UI.Views
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseSettingSetupWindow));
             this.ServerName = new System.Windows.Forms.TextBox();
             this.serverNameLabel = new System.Windows.Forms.Label();
             this.portNumberLabel = new System.Windows.Forms.Label();
@@ -191,6 +192,7 @@ namespace ModelGenerator.UI.Views
             this.Controls.Add(this.ServerName);
             this.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DatabaseSettingSetupWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Database Setting";

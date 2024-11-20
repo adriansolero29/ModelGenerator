@@ -29,10 +29,12 @@ namespace ModelGenerator.UI.Views
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneratorMainUI));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DatabaseSetting = new System.Windows.Forms.ToolStripMenuItem();
+            this.propertyTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ModelSampleOutput = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -59,7 +61,6 @@ namespace ModelGenerator.UI.Views
             this.databaseTypeValue = new System.Windows.Forms.Label();
             this.lblDatabaseName = new System.Windows.Forms.Label();
             this.lblDatabase = new System.Windows.Forms.Label();
-            this.propertyTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -100,6 +101,13 @@ namespace ModelGenerator.UI.Views
             this.DatabaseSetting.Size = new System.Drawing.Size(107, 20);
             this.DatabaseSetting.Text = "Database Setting";
             this.DatabaseSetting.Click += new System.EventHandler(this.DatabaseSetting_Click);
+            // 
+            // propertyTypesToolStripMenuItem
+            // 
+            this.propertyTypesToolStripMenuItem.Name = "propertyTypesToolStripMenuItem";
+            this.propertyTypesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.propertyTypesToolStripMenuItem.Text = "Property Types";
+            this.propertyTypesToolStripMenuItem.Click += new System.EventHandler(this.propertyTypesToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -393,13 +401,6 @@ namespace ModelGenerator.UI.Views
             this.lblDatabase.TabIndex = 0;
             this.lblDatabase.Text = "Database Type:";
             // 
-            // propertyTypesToolStripMenuItem
-            // 
-            this.propertyTypesToolStripMenuItem.Name = "propertyTypesToolStripMenuItem";
-            this.propertyTypesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.propertyTypesToolStripMenuItem.Text = "Property Types";
-            this.propertyTypesToolStripMenuItem.Click += new System.EventHandler(this.propertyTypesToolStripMenuItem_Click);
-            // 
             // GeneratorMainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -410,6 +411,7 @@ namespace ModelGenerator.UI.Views
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GeneratorMainUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
