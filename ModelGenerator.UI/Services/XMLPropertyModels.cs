@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace ModelGenerator.UI.Services
 {
-    public class XMLPropertyModels : IXMLService
+    public class XMLPropertyModels : IXMLService, IXMLDataProcessor
     {
         public string XMLPath { get; set; }
         private XmlDocument xmlDoc;
@@ -53,6 +53,16 @@ namespace ModelGenerator.UI.Services
             this.xmlDoc = new XmlDocument();
             this.XMLPath = "PropertyModelTypes.xml";
             xmlDoc.Load(this.XMLPath);
+        }
+
+        public void Delete(string elementName)
+        {
+            LoadXML();
+            var parent = xmlDoc.SelectSingleNode("propertyTypes");
+            var toDelete = parent.SelectSingleNode(elementName);
+            parent.RemoveChild(toDelete);
+
+            xmlDoc.Save(XMLPath);
         }
     }
 }
