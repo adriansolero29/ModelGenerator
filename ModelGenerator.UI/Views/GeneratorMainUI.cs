@@ -18,9 +18,6 @@ namespace ModelGenerator.UI.Views
         private readonly IServiceProvider serviceProvider;
         private readonly IBusinessLogicService businessLogicService;
         private readonly IXMLPropertyTypesList xMLPropertyTypesList;
-        private readonly DatabaseSettingSetupWindow databaseSettingSetupWindow;
-        private readonly GeneratedModelViewer modelViewer;
-        private readonly PropertyModelSetup propertyModelSetup;
 
         public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IServiceProvider serviceProvider, IBusinessLogicService businessLogicService, IXMLPropertyTypesList xMLPropertyTypesList, DataTypeConverterServiceResolver dataTypeConverter, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer, PropertyModelSetup propertyModelSetup)
         {
@@ -31,9 +28,14 @@ namespace ModelGenerator.UI.Views
             this.serviceProvider = serviceProvider;
             this.businessLogicService = businessLogicService;
             this.xMLPropertyTypesList = xMLPropertyTypesList;
-            this.databaseSettingSetupWindow = databaseSettingSetupWindow;
-            this.modelViewer = modelViewer;
-            this.propertyModelSetup = propertyModelSetup;
+
+            if (!Helpers.DatabaseSetting.CheckDatabaseSetting())
+            {
+                var databaseSetup = Helpers.DialogHelpers.ShowDialog<DatabaseSettingSetupWindow>(serviceProvider);
+                databaseSetup.ShowDialog();
+                return;
+            }
+
             Init();
         }
 
@@ -44,7 +46,8 @@ namespace ModelGenerator.UI.Views
 
         private void DatabaseSetting_Click(object sender, EventArgs e)
         {
-            databaseSettingSetupWindow.ShowDialog();
+            var databaseSetting = Helpers.DialogHelpers.ShowDialog<DatabaseSettingSetupWindow>(serviceProvider);
+            databaseSetting.ShowDialog();
         }
 
         private async void Init()
@@ -103,8 +106,11 @@ namespace ModelGenerator.UI.Views
             }
 
             var output = ModelOutputGenerator.Output(PropertyTypeList.SelectedItem.ToString(), listColumns, ObjectLoaderCheck.Checked, ModelSuffix.Text, xmlPropertyService, dataTypeConverter);
-            modelViewer.PropertyModel.ModelFormat = output;
-            modelViewer.ShowDialog();
+            var generatedViewer = Helpers.DialogHelpers.ShowDialog<GeneratedModelViewer>(serviceProvider) as GeneratedModelViewer;
+            generatedViewer.PropertyModel.ModelFormat = output;
+            generatedViewer.PropertyModel.ModelName = TableList.SelectedItem.ToString();
+
+            generatedViewer.ShowDialog();
         }
 
         private void ModelSuffix_TextChanged(object sender, EventArgs e)
@@ -115,13 +121,12 @@ namespace ModelGenerator.UI.Views
 
         private void propertyTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var a = (Form)serviceProvider.GetService(typeof(PropertyModelSetup));
-            a.ShowDialog();
+            var modelSetup = DialogHelpers.ShowDialog<PropertyModelSetup>(serviceProvider);
+            modelSetup.ShowDialog();
 
             PropertyTypeList.DataSource = null;
             PropertyTypeList.Items.Clear();
             PropertyTypeList.DataSource = xMLPropertyTypesList.GetProperties();
-
         }
     }
 }
