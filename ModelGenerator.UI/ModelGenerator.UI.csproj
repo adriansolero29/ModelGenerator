@@ -5,6 +5,8 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>mimetypes_Csharp_423.ico</ApplicationIcon>
+    <_SuppressWinFormsTrimError>true</_SuppressWinFormsTrimError>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>

@@ -19,7 +19,7 @@ namespace ModelGenerator.UI.Views
         private readonly IBusinessLogicService businessLogicService;
         private readonly IXMLPropertyTypesList xMLPropertyTypesList;
 
-        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IServiceProvider serviceProvider, IBusinessLogicService businessLogicService, IXMLPropertyTypesList xMLPropertyTypesList, DataTypeConverterServiceResolver dataTypeConverter, DatabaseSettingSetupWindow databaseSettingSetupWindow, GeneratedModelViewer modelViewer, PropertyModelSetup propertyModelSetup)
+        public GeneratorMainUI(ServiceResolverXML databaseXmlServiceResolver, IServiceProvider serviceProvider, IBusinessLogicService businessLogicService, IXMLPropertyTypesList xMLPropertyTypesList, DataTypeConverterServiceResolver dataTypeConverter)
         {
             InitializeComponent();
             this.databaseXmlService = databaseXmlServiceResolver(XMLService.XMLDatabaseSetting);
@@ -52,15 +52,23 @@ namespace ModelGenerator.UI.Views
 
         private async void Init()
         {
-            databaseXmlService.GetValues();
+            try
+            {
+                databaseXmlService.GetValues();
 
-            databaseTypeValue.Text = DataCommunication.DatabaseType;
-            databaseNameValue.Text = DataCommunication.DatabaseName;
-            PortNumber.Text = DataCommunication.PortNumber;
-            UserId.Text = DataCommunication.UserId;
+                databaseTypeValue.Text = DataCommunication.DatabaseType;
+                databaseNameValue.Text = DataCommunication.DatabaseName;
+                PortNumber.Text = DataCommunication.PortNumber;
+                UserId.Text = DataCommunication.UserId;
 
-            SchemaList.DataSource = await businessLogicService.SchemaList();
-            PropertyTypeList.DataSource = xMLPropertyTypesList.GetProperties();
+                SchemaList.DataSource = await businessLogicService.SchemaList();
+                PropertyTypeList.DataSource = xMLPropertyTypesList.GetProperties();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Database setting not properly initialized", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
 
         private async void SchemaList_SelectedValueChanged(object sender, EventArgs e)

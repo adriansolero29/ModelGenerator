@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestModelCreatorXMLManipula
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGenerator.Models", "ModelGenerator.Models\ModelGenerator.Models.csproj", "{933EEC55-9C38-464B-ABC7-59C6A5E773B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGenerator.UI", "ModelGenerator.UI\ModelGenerator.UI.csproj", "{1A981B8D-08EF-4FA9-A939-3B88868FA0DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGenerator.UI", "ModelGenerator.UI\ModelGenerator.UI.csproj", "{1A981B8D-08EF-4FA9-A939-3B88868FA0DF}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{8238FF09-8821-4AC5-B292-FC650331E25B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,8 @@ Global
 		{1A981B8D-08EF-4FA9-A939-3B88868FA0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A981B8D-08EF-4FA9-A939-3B88868FA0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A981B8D-08EF-4FA9-A939-3B88868FA0DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8238FF09-8821-4AC5-B292-FC650331E25B}.Debug|Any CPU.ActiveCfg = Debug
+		{8238FF09-8821-4AC5-B292-FC650331E25B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

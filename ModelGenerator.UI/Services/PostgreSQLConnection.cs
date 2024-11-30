@@ -36,6 +36,7 @@ namespace ModelGenerator.UI.Services
         {
             try
             {
+                InitializeConnection();
                 DataCommunication.DatabaseConnection.Open();
             }
             catch (System.Exception)

@@ -243,6 +243,7 @@ namespace ModelGenerator.UI.Views
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FieldPanel.Enabled = true;
+            ModelName.Enabled = false;
             IsEdit = true;
         }
 
